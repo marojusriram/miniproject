@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Yield Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body style="background-color: #8EC5FC; background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);">
+
+    <H1 class="text-center " style="color:white;font-family:Georgia;font-size:50px">Crop Yield Prediction </H1><br>
+
+    <div class="container " style="background-color: #8EC5FC;background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);">
+        <h1 class="text-center" style="color:white">Enter the features</h1><br>
+        <div class="mx-auto col-10 col-md-8 col-lg-6">
+    <form action="/predict" method="POST">
+
+        <div class="form-group">
+            <label style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">State names</label><br>
+        <select name="state_names" class="form-select w-75" aria-label="Default select example" >
+        {% for value in state_values[0] %}
+        <option value="{{ value }}">{{ value }}</option>
+        {% endfor %}
+        </select>
+        </div>
+
+
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">District names</label><br>
+        <select name="district_names" class="form-select w-75" aria-label="Default select example">
+        {% for value in district_values[0] %}
+        <option value="{{ value }}">{{ value }}</option>
+        {% endfor %}
+        </select>
+        </div>
+
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">Season names</label><br>
+        <select name="season_names" class="form-select w-75" aria-label="Default select example">
+        {% for value in season_values[0] %}
+        <option value="{{ value }}">{{ value }}</option>
+        {% endfor %}
+        </select>
+        </div>
+
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">Crop names</label><br>
+        <select name="crop_names" class="form-select w-75" aria-label="Default select example">
+        {% for value in crop_values[0] %}
+        <option value="{{ value }}">{{ value }}</option>
+        {% endfor %}
+        </select>
+        </div>
+
+
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">Area</label>
+            <input type="number" class="form-control w-75" name="area" step="any" placeholder="eg:200 (in acres)">
+        </div>
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">Temperature</label>
+            <input type="number" class="form-control w-75" name="temperature" step="any" placeholder="eg:25 (in Celsius)">
+        </div>
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">Rainfall</label>
+            <input type="number" class="form-control w-75" name="precipitation" step="any" placeholder="eg:25 (in mm)">
+        </div>
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">Humidity</label>
+            <input type="number" class="form-control w-75" name="humidity" step="any" placeholder="eg:64.5 (in g/m3)">
+        </div>
+
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">soil_type</label><br>
+        <select name="soil_type" class="form-select w-75" aria-label="Default select example">
+        {% for value in soil_values[0] %}
+        <option value="{{ value }}">{{ value }}</option>
+        {% endfor %}
+        </select>
+        </div>
+
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">N(%)</label>
+            <input type="number" class="form-control w-75" name="N" step="any">
+        </div>
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">P(%)</label>
+            <input type="number" class="form-control w-75" name="P" step="any">
+        </div>
+        <div class="form-group">
+            <label  style="color:black;font-family:san-serif;font-weight:bold;font-size:20px">K(%)</label>
+            <input type="number" class="form-control w-75" name="K" step="any">
+        </div>
+
+        <button type="submit" class="btn btn-lg mt-4" style="background-color:lightgreen;border-radius:0.5rem">Predict</button>
+
+    </form>
+        </div>
+    {% if predicted_value %}
+    <h1 class="text-center" style="color:white">
+        Predicted Yield Production: <br>
+        {{predicted_value[0][0]}} tons/acre
+    </h1>
+    {% endif %}
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>
